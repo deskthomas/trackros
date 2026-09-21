@@ -22,11 +22,10 @@ struct JournalView: View {
                 
                 VStack(alignment: .leading, spacing: 8){
                     
-                   // NavigationLink(destination: AddFoodView()){
-                     //   Text("Trackros")
-                    //}
-                    
-                  //  .bold()
+                   NavigationLink(destination: AddFoodView()){
+                     Text("Trackros")
+                    }
+                        .bold()
                     //.padding()
                     
                     NavigationLink(destination: AddFoodView()){

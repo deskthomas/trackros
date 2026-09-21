@@ -15,13 +15,25 @@ struct AddFoodView: View {
     @Query private var foodItems: [FoodItem]
     @State private var foodItem =  FoodItem(name: "", calories: 0, protein: 0, carbs: 0, fat: 0, date: Date())
     
-    func addFood(){
+    func addFood()
+    {
         let foodItem = FoodItem(
             name: foodItem.name, calories: foodItem.calories, protein: foodItem.protein, carbs: foodItem.carbs, fat: foodItem.fat, date: foodItem.date)
-        context.insert(foodItem)}
+        context.insert(foodItem)
+    }
+    
+    func removeFood()
+    {
+        if foodItems.count != 0{
+            context.delete(foodItems[foodItems.count - 1])
+        } else {
+            print("list empty")
+        }
+        
+    }
     
     var body: some View {
-        VStack(alignment: .trailing){
+        VStack{
             TextField("Food ", text: $foodItem.name){
                 
             }
@@ -53,42 +65,57 @@ struct AddFoodView: View {
             .padding()
         }
         
-        List{
-            Button(action: {
-                addFood()
-            }){
-                Label("Add Food", systemImage: "plus")
+        VStack{
+            HStack{
+                Button(action: {
+                    addFood()
+                }){
+                    Label("Add Food", systemImage: "plus")
+                }
+                .padding(15)
+                
+                Button(action: {
+                    removeFood()
+                }){
+                    Label("Remove Food", systemImage: "minus")
+                }
+                .padding(15)
             }
-            .padding(15)
             
             VStack{
+                ScrollView(.vertical){
                     ScrollView(.horizontal){
                         ForEach(foodItems){
                             foodItem in
-                            HStack{
-                                
+                            VStack(alignment: .leading){
                                 Text(foodItem.name)
                                     .fixedSize()
                                     .bold()
-                                Text("Cal: \(foodItem.calories)")
-                                    .monospaced(true)
-                                    .fixedSize()
-                                Text("P: \(foodItem.protein)")
-                                    .fixedSize()
-                                Text("C: \(foodItem.carbs)")
-                                    .fixedSize()
-                                Text("F: \(foodItem.fat)")
-                                    .fixedSize()
-                                Spacer()
-                                    .padding()
-                            }
+                                HStack{
+                                    Text("Cal: \(foodItem.calories)")
+                                        .monospaced(true)
+                                        .fixedSize()
+                                    Text("P: \(foodItem.protein)")
+                                        .monospaced(true)
+                                        .fixedSize()
+                                    Text("C: \(foodItem.carbs)")
+                                        .monospaced(true)
+                                        .fixedSize()
+                                    Text("F: \(foodItem.fat)")
+                                        .monospaced(true)
+                                        .fixedSize()
+                                    Spacer()
+                                    //.padding()
                                 }
+                            }
+                            .padding()
+                        }
+                    }
+                }
                 }
             }
-            
         }
     }
-}
 
 #Preview {
     AddFoodView()
