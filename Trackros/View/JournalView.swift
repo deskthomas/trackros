@@ -28,7 +28,7 @@ struct JournalView: View {
                         .bold()
                     //.padding()
                     
-                    NavigationLink(destination: AddFoodView()){
+                    NavigationLink(destination: ViewFoodView()){
                         Text("View")
                     }
                     // .padding()

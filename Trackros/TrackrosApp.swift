@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct TrackrosApp: App {
+    
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

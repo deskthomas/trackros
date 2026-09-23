@@ -15,6 +15,7 @@ struct AddFoodView: View {
     @Query private var foodItems: [FoodItem]
     @State private var foodItem =  FoodItem(name: "", calories: 0, protein: 0, carbs: 0, fat: 0, date: Date())
     
+    
     func addFood()
     {
         let foodItem = FoodItem(
@@ -34,27 +35,27 @@ struct AddFoodView: View {
     
     var body: some View {
         VStack{
-            TextField("Food ", text: $foodItem.name){
+            TextField(text: $foodItem.name, prompt: Text("Food Name")){
                 
             }
             .padding()
             
-            TextField("Calories ", value: $foodItem.calories, formatter: NumberFormatter()){
+            TextField(value: $foodItem.calories, formatter: NumberFormatter(), prompt: Text("Calories")){
                 
             }
             .padding()
             
-            TextField("Protein ", value: $foodItem.protein, formatter: NumberFormatter()){
+            TextField(value: $foodItem.protein, formatter: NumberFormatter(), prompt: Text("Protein")){
                 
             }
             .padding()
             
-            TextField("Carbs ", value: $foodItem.carbs, formatter: NumberFormatter()){
+            TextField(value: $foodItem.carbs, formatter: NumberFormatter(), prompt: Text("Carbs")){
                 
             }
             .padding()
             
-            TextField("Fat ", value: $foodItem.fat, formatter: NumberFormatter()){
+            TextField(value: $foodItem.fat, formatter: NumberFormatter(), prompt: Text("Fat")){
                 
             }
             .padding()
