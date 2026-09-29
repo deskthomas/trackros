@@ -11,18 +11,22 @@ import SwiftData
 struct ViewFoodView: View {
     @Query private var foodItems: [FoodItem]
     @State private var foodItem =  FoodItem(name: "", calories: 0, protein: 0, carbs: 0, fat: 0, date: Date())
+    @State private var selectedDate: Date = Date()
+    @State private var dailyTotal: Int = 0
     
-  
+    
+    
+    
     //var totalCalories: (() -> Int)
     
     
     
-
+    
     
     
     
     var body: some View {
-       
+        
         VStack(alignment: .leading){
             ScrollView(.vertical){
                 ScrollView(.horizontal){
@@ -53,6 +57,23 @@ struct ViewFoodView: View {
                     }
                 }
             }
+            HStack{
+                DatePicker(selection: $selectedDate, displayedComponents: .date){
+                    Text("Date")
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                }
+                
+                Button(action: {
+                    
+                    dailyTotal = foodItem.sumUserDateFoods(foodItems: foodItems, selectedDate: selectedDate)
+                    print(selectedDate)
+                }){
+                    Label("View Daily Total", systemImage: "eye")
+                }
+                
+                
+                
+            }
             
             VStack(alignment: .leading){
                 Text("Totals")
@@ -61,9 +82,10 @@ struct ViewFoodView: View {
                 Text("Protein: \(foodItem.sumProtein(foodItems: foodItems))")
                 Text("Carbs: \(foodItem.sumCarbs(foodItems: foodItems))")
                 Text("Fat: \(foodItem.sumFat(foodItems: foodItems))")
+                Text("Daily Calorie Total: \(dailyTotal)")
             }
-    
-            }
+            
+        }
         
     }
 }

@@ -60,8 +60,10 @@ struct AddFoodView: View {
             }
             .padding()
             
-            DatePicker(selection: $foodItem.date){
+            DatePicker(selection: $foodItem.date, displayedComponents: .date){
                 Text("Date")
+                    .datePickerStyle(GraphicalDatePickerStyle())
+                    
             }
             .padding()
         }

@@ -17,6 +17,9 @@ class FoodItem: Identifiable{
     var fat: Int
     var date: Date
     
+ 
+    
+    
     init(name: String, calories: Int, protein: Int, carbs: Int, fat: Int, date: Date){
         self.name = name
         self.calories = calories
@@ -25,6 +28,8 @@ class FoodItem: Identifiable{
         self.fat = fat
         self.date = date
     }
+    
+
     
     func sumCalories(foodItems: [FoodItem]) -> Int{
         var totalCals: Int = 0
@@ -60,6 +65,30 @@ class FoodItem: Identifiable{
         }
     
        return totalFat
+    }
+    
+    func sumUserDateFoods(foodItems: [FoodItem], selectedDate: Date)-> Int{
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        var dailyCalorieTotal: Int = 0
+        
+        for i in(0..<foodItems.count){
+            let selectedDateString = formatter.string(from: selectedDate)
+            let originalDateString = formatter.string(from: foodItems[i].date)
+            if selectedDateString == originalDateString {
+                dailyCalorieTotal = dailyCalorieTotal + foodItems[i].calories
+            }
+            else{
+                print("wrong date")
+                print(foodItems.count)
+                
+            }
+            
+        }
+        print(formatter.string(from: selectedDate))
+        return dailyCalorieTotal
     }
     
    
